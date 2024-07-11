@@ -1,0 +1,38 @@
+name: voice_copilot
+description: "Care voice copilot plugin."
+version: 0.0.1
+homepage: https://github.com/Care-Intelligence/voice-copilot
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  barcode_scan2: ^4.3.1
+  dart_openai: ^5.1.0
+  flutter:
+    sdk: flutter
+  flutter_dotenv: ^5.1.0
+  http: ^1.2.1
+  http_parser: ^4.0.2
+  path_provider: ^2.1.3
+  plugin_platform_interface: ^2.0.2
+  record: ^5.1.2
+  shared_preferences: ^2.2.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.0.16
+  flutter_lints: ^3.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.voice_copilot
+        pluginClass: VoiceCopilotPlugin
+      ios:
+        pluginClass: VoiceCopilotPlugin
+
+publish_to: https://pub.dev/publishers/careintelligence-packages.net
