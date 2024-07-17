@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: barcode_scan2
-      sha256: "142d1264864b415b866e51c8306e78c8de228230f5a59d9ae5f77d1490c79de1"
+      sha256: c1be395802e55f4b54f43a0cf3ece197dc8cc11683a57ea5580a16cc22ba6944
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -520,10 +520,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "814e9e88f21a176ae1359149021870e87f7cddaf633ab678a5d2b0bff7fd1ba8"
+      sha256: "83d37c7ad7aaf9aa8e275490669535c8080377cfa7a7004c24dfac53afffaa90"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.0"
+    version: "4.4.2"
   vector_math:
     dependency: transitive
     description:

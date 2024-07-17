@@ -18,7 +18,8 @@ class TranscriptService {
       'language': language,
       'api_key': apiKey,
       'platform': Platform.isAndroid ? "ANDROID" : "IOS",
-      'encode': Platform.isAndroid ? "OPUS" : "FLAC"
+      'encode': Platform.isAndroid ? "OPUS" : "FLAC",
+      'extract_entities': "true",
     });
 
     // Determinar o tipo de MIME do arquivo
