@@ -58,4 +58,40 @@ class TranscriptService {
       return {"transcript": ""};
     }
   }
+
+  Future<Map<String, dynamic>> getEncoder(
+      String transcript, String baseText, String apiKey) async {
+    try {
+      // Construir o corpo da requisição JSON
+      var requestBody = {
+        'service_name': 'get_encoder',
+        'service_args': {
+          "platform": Platform.isAndroid ? "android" : "ios",
+          "transcript": transcript,
+          "original_text": baseText
+        },
+        'api_key': apiKey,
+      };
+
+      print("Sending request to server..."); // Log de depuração
+
+      // Enviar a requisição
+      var response = await http.post(
+        Uri.parse('https://care-voice-ai.azurewebsites.net/services'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
+
+      // Verificar o status da resposta
+      if (response.statusCode == 200) {
+        print("Response received successfully."); // Log de depuração
+        return Map<String, dynamic>.from(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to load transcript: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error occurred: $e"); // Log de depuração
+      return {"status": false, "encoder": null};
+    }
+  }
 }

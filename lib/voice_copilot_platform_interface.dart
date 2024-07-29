@@ -15,11 +15,26 @@ abstract class VoiceCopilotPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<bool> startRecord(Map<String, dynamic> params) {
+  Future<bool> startRecord(Map<String, dynamic>? params) {
     throw UnimplementedError('startRecord() has not been implemented.');
   }
 
   Future<Map<String, dynamic>> stopRecord(String apiKey, String language) {
     throw UnimplementedError('stopRecord() has not been implemented.');
+  }
+
+  Future<bool> cancelAudio() {
+    throw UnimplementedError('stopRecord() has not been implemented.');
+  }
+
+  Future<bool> startCalibration(
+      String baseTextTranscript, String? languageChange) {
+    throw UnimplementedError('startCalibration() has not been implemented.');
+  }
+
+  Future<Map<String, dynamic>> stopCalibration(
+    String apiKey,
+  ) {
+    throw UnimplementedError('stopCalibration() has not been implemented.');
   }
 }

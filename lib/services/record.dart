@@ -57,13 +57,13 @@ class RecordService {
 
       Map speechToTextResult =
           await _service.getTranscript(audioFile, language, apiKey);
-
       bool isSuccess = speechToTextResult['transcript'].toString().isNotEmpty;
 
       if (isSuccess) {
         resultStopRecord['transcript'] = speechToTextResult['transcript'];
         resultStopRecord['entities'] = speechToTextResult['entities'];
         resultStopRecord['status'] = true;
+        print(resultStopRecord);
         return resultStopRecord;
       }
 
@@ -71,5 +71,13 @@ class RecordService {
     } catch (e) {
       return resultStopRecord;
     }
+  }
+
+  Future<bool> cancelAudio() async {
+    final path = await recorder.stop();
+    if (path != null) {
+      return true;
+    }
+    return false;
   }
 }

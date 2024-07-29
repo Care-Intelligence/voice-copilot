@@ -8,13 +8,26 @@ class CareVoiceCopilot {
 
   CareVoiceCopilot({required this.language, required this.apiKey});
 
-  Future<bool> start() async {
-    // await _loadEnv();
-    return await VoiceCopilotPlatform.instance.startRecord({});
+  Future<bool> start(Map<String, dynamic>? calibration) async {
+    return await VoiceCopilotPlatform.instance.startRecord(calibration);
   }
 
   Future<Map<String, dynamic>> stop() async {
-    // await _loadEnv();
     return VoiceCopilotPlatform.instance.stopRecord(apiKey, language);
+  }
+
+  Future<bool> cancelAudio() async {
+    return VoiceCopilotPlatform.instance.cancelAudio();
+  }
+
+  Future<bool> startCalibration(
+    String baseTextTranscript,
+  ) async {
+    return VoiceCopilotPlatform.instance
+        .startCalibration(baseTextTranscript, language);
+  }
+
+  Future<Map<String, dynamic>> stopCalibration() async {
+    return VoiceCopilotPlatform.instance.stopCalibration(apiKey);
   }
 }

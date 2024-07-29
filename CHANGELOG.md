@@ -1,9 +1,9 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial release.
 - Versão inicial do pacote.
 
 ## 0.0.2
 
-* TODO: Describe initial release.
-- Entities working.
+* Mudanças no transcript.
+- Retornando entities e Calibration.
