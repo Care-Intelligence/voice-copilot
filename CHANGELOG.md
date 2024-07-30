@@ -7,3 +7,4 @@
 
 * Mudanças no transcript.
 - Retornando entities e Calibration.
+- Possibilidade de cancelar o record.

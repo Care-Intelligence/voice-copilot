@@ -36,6 +36,9 @@ if (started) {
 
 Map<String, dynamic> recordingData = await voiceCopilot.stop();
 print('Recording stopped with data: $recordingData');
+
+bool recordingData = await voiceCopilot.cancelAudio();
+print('Audio cancelled');
 ```
 
 Android:
