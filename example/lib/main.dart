@@ -13,10 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _voiceCopilotPlugin = CareVoiceCopilot(
-      language: "pt",
-      apiKey:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaW5mbyI6IkFwcCBlZ1N5cyIsImVtYWlsIjoiZWdzeXNAY2FyZWludGVsbGlnZW5jZS5haSIsInBhc3N3b3JkIjoiYWRtaW4yMDI0IiwiY29udGVudF90eXBlIjoicG9saWNlX3JlY29yZHMifQ.-myBZMvQBIOESKG4fdeqpiKCj5noBcXDy39ym6xOcfg");
+  final _voiceCopilotPlugin = CareVoiceCopilot(language: "pt", apiKey: "");
 
   String _startResult = 'Not started';
   String _startResultCalibration = 'Not started';
