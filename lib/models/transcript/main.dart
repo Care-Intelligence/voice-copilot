@@ -11,7 +11,7 @@ class TranscriptService {
     }
 
     var request = http.MultipartRequest('POST',
-        Uri.parse('https://care-voice-ai.azurewebsites.net/services/upload'));
+        Uri.parse('https://care-voice-ai.azurewebsites.net/process_audio'));
 
     request.fields.addAll({
       'service_name': 'speech_to_text',
@@ -49,6 +49,7 @@ class TranscriptService {
       if (response.statusCode == 200) {
         var responseData = await response.stream.bytesToString();
         print("Response received successfully."); // Log de depuração
+        print(responseData);
         return Map<String, dynamic>.from(jsonDecode(responseData));
       } else {
         throw Exception('Failed to load transcript: ${response.statusCode}');
