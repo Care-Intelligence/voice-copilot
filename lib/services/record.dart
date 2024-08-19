@@ -51,6 +51,7 @@ class RecordService {
       'entities': [],
       'input_tokens': 0,
       'output_tokens': 0,
+      'url': ''
     };
 
     try {
@@ -66,6 +67,7 @@ class RecordService {
         resultStopRecord['entities'] = speechToTextResult['entities'];
         resultStopRecord['input_tokens'] = speechToTextResult['input_tokens'];
         resultStopRecord['output_tokens'] = speechToTextResult['output_tokens'];
+        resultStopRecord['url'] = speechToTextResult['url'];
         resultStopRecord['status'] = true;
         print(resultStopRecord);
         return resultStopRecord;

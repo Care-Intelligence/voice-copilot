@@ -23,6 +23,7 @@ class TranscriptService {
       'platform': Platform.isAndroid ? "ANDROID" : "IOS",
       'encode': Platform.isAndroid ? "OPUS" : "FLAC",
       'extract_entities': "true",
+      'url': ''
     });
 
     // Determinar o tipo de MIME do arquivo
