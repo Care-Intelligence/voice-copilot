@@ -49,6 +49,8 @@ class RecordService {
       'status': false,
       'transcript': 'Não detectou nada...',
       'entities': [],
+      'input_tokens': 0,
+      'output_tokens': 0,
     };
 
     try {
@@ -62,6 +64,8 @@ class RecordService {
       if (isSuccess) {
         resultStopRecord['transcript'] = speechToTextResult['transcript'];
         resultStopRecord['entities'] = speechToTextResult['entities'];
+        resultStopRecord['input_tokens'] = speechToTextResult['input_tokens'];
+        resultStopRecord['output_tokens'] = speechToTextResult['output_tokens'];
         resultStopRecord['status'] = true;
         print(resultStopRecord);
         return resultStopRecord;
