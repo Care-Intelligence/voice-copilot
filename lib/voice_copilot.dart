@@ -1,5 +1,6 @@
 library voice_copilot;
 
+import 'package:voice_copilot/models/assistants/main.dart';
 import 'package:voice_copilot/voice_copilot_platform_interface.dart';
 
 class CareVoiceCopilot {
@@ -14,6 +15,16 @@ class CareVoiceCopilot {
 
   Future<Map<String, dynamic>> stop() async {
     return VoiceCopilotPlatform.instance.stopRecord(apiKey, language);
+  }
+
+  Future<List<Assistant>> getAssistants() async {
+    return await VoiceCopilotPlatform.instance.getAssistants(apiKey);
+  }
+
+  Future<List<Map<String, dynamic>>> useAssistants(
+      List<Assistant> assistants, String transcript) async {
+    return await VoiceCopilotPlatform.instance
+        .useAssistants(apiKey, assistants, transcript);
   }
 
   Future<bool> cancelAudio() async {

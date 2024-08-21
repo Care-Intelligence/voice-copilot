@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:record/record.dart';
-import 'package:voice_copilot/models/transcript/main.dart';
+import 'package:voice_copilot/services/transcript/main.dart';
 import 'package:voice_copilot/services/record.dart';
 
 class CalibrationService {

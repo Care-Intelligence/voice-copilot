@@ -2,8 +2,83 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:voice_copilot/models/assistants/main.dart';
 
 class TranscriptService {
+  Future<List<Map<String, dynamic>>> useAssistants(
+      String apiKey, List<Assistant> assistants, String transcript) async {
+    List<Map<String, dynamic>> entities = [];
+
+    try {
+      // Construir o corpo da requisição JSON
+      var requestBody = {
+        'service_args': {
+          "transcript": transcript,
+          "assistant_ids": assistants.map((e) => e.toJson()).toList(),
+        },
+        'api_key': apiKey,
+      };
+
+      print("Sending request to server..."); // Log de depuração
+
+      // Enviar a requisição
+      var response = await http.post(
+        Uri.parse('https://care-voice-ai.azurewebsites.net/use_assistants'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
+
+      // Verificar o status da resposta
+      if (response.statusCode == 200) {
+        print("Response received successfully."); // Log de depuração
+        var aqui =
+            Map<String, dynamic>.from(jsonDecode(response.body))["entities"];
+
+        print(aqui);
+      } else {
+        throw Exception('Failed to load transcript: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error occurred: $e"); // Log de depuração
+    }
+
+    return entities;
+  }
+
+  Future<List<Assistant>> getAssistants(String apiKey) async {
+    List<Assistant> assistants = [];
+    try {
+      // Construir o corpo da requisição JSON
+      var requestBody = {
+        'service_name': 'get_assistants',
+        'api_key': apiKey,
+      };
+
+      print("Sending request to server..."); // Log de depuração
+
+      // Enviar a requisição
+      var response = await http.post(
+        Uri.parse('https://care-voice-ai.azurewebsites.net/services'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
+
+      // Verificar o status da resposta
+      if (response.statusCode == 200) {
+        print("Response received successfully."); // Log de depuração
+        var body = Map<String, dynamic>.from(jsonDecode(response.body));
+        for (var i = 0; i < body["assistants"].length; i++) {
+          assistants.add(Assistant.fromJson(body["assistants"][i]));
+        }
+      } else {
+        throw Exception('Failed to load transcript: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error occurred: $e"); // Log de depuração
+    }
+    return assistants;
+  }
+
   Future<Map<String, dynamic>> getTranscript(
       File? file, String language, String apiKey) async {
     if (file == null) {

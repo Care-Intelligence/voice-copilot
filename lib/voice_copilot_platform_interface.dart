@@ -1,4 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:voice_copilot/models/assistants/main.dart';
 import 'package:voice_copilot/voice_copilot_method_channel.dart'; // Corrigido o import
 
 abstract class VoiceCopilotPlatform extends PlatformInterface {
@@ -20,6 +21,15 @@ abstract class VoiceCopilotPlatform extends PlatformInterface {
   }
 
   Future<Map<String, dynamic>> stopRecord(String apiKey, String language) {
+    throw UnimplementedError('stopRecord() has not been implemented.');
+  }
+
+  Future<List<Assistant>> getAssistants(String apiKey) {
+    throw UnimplementedError('stopRecord() has not been implemented.');
+  }
+
+  Future<List<Map<String, dynamic>>> useAssistants(
+      String apiKey, List<Assistant> assistants, String transcript) {
     throw UnimplementedError('stopRecord() has not been implemented.');
   }
 

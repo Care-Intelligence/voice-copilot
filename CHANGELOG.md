@@ -14,3 +14,8 @@
 * Mudanças no retorno do transcript.
 - Retornando a quantidade de input e output tokens
 - Retornando URL do audio
+
+
+## 0.0.5
+
+* Pequenas mudanças.

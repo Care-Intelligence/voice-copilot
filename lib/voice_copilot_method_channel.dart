@@ -1,4 +1,6 @@
 import 'package:record/record.dart';
+import 'package:voice_copilot/models/assistants/main.dart';
+import 'package:voice_copilot/services/assistant.dart';
 import 'package:voice_copilot/services/calibration.dart';
 
 import 'voice_copilot_platform_interface.dart';
@@ -9,6 +11,8 @@ class LocalVoiceCopilot extends VoiceCopilotPlatform {
       RecordService(recorder: AudioRecorder());
   final CalibrationService _calibrationService =
       CalibrationService(recorder: AudioRecorder());
+  final AssistantService _assistantService = AssistantService();
+
   @override
   Future<bool> startRecord(Map<String, dynamic>? params) async {
     return _processService.startRecord(params);
@@ -18,6 +22,17 @@ class LocalVoiceCopilot extends VoiceCopilotPlatform {
   Future<Map<String, dynamic>> stopRecord(
       String apiKey, String language) async {
     return _processService.stopRecord(apiKey, language);
+  }
+
+  @override
+  Future<List<Assistant>> getAssistants(String apiKey) async {
+    return _assistantService.getAssistants(apiKey);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> useAssistants(
+      String apiKey, List<Assistant> assistants, String transcript) async {
+    return _assistantService.useAssistants(apiKey, assistants, transcript);
   }
 
   @override

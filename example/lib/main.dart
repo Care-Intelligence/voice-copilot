@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voice_copilot/models/assistants/main.dart';
 import 'package:voice_copilot/voice_copilot.dart';
 
 void main() {
@@ -19,6 +20,9 @@ class _MyAppState extends State<MyApp> {
   String _startResultCalibration = 'Not started';
   String _stopResult = 'Not stopped';
   String _stopResultCalibration = 'Not stopped';
+  String _assistants = 'None';
+  String _entities = 'None';
+  List<Assistant>? _assistantList;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +86,38 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 child: const Text('Stop Recording'),
+              ),
+              const SizedBox(height: 20),
+              Text('Assistants: $_assistants'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  List<Assistant> assistants =
+                      await _voiceCopilotPlugin.getAssistants();
+
+                  _assistantList = assistants;
+                  print(assistants);
+
+                  setState(() {
+                    _assistants = assistants.map((e) => e.toJson()).toString();
+                  });
+                },
+                child: const Text('Get Assistants'),
+              ),
+              const SizedBox(height: 20),
+              Text('Entities: $_entities'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  List<Map<String, dynamic>> entities =
+                      await _voiceCopilotPlugin.useAssistants(
+                          _assistantList ?? [],
+                          "Nenhum pertence encontrado na vitima");
+                  setState(() {
+                    _entities = entities.toString();
+                  });
+                },
+                child: const Text('Use Assistants'),
               ),
             ],
           ),

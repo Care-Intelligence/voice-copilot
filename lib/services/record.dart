@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:voice_copilot/models/transcript/main.dart';
+import 'package:voice_copilot/services/transcript/main.dart';
 import 'package:voice_copilot/services/encoder/main.dart';
 
 class RecordService {
