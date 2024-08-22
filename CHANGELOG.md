@@ -19,3 +19,15 @@
 ## 0.0.5
 
 * Pequenas mudanças.
+
+## 0.0.6
+
+* Novas Features.
+- Busca por assistentes
+- Uso de assistentes
+
+## 0.0.7
+
+* Novas Features.
+- Busca por assistentes
+- Uso de assistentes

@@ -3,8 +3,42 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:voice_copilot/models/assistants/main.dart';
+import 'package:voice_copilot/models/metrics/main.dart';
+import 'package:voice_copilot/services/logs.dart';
 
-class TranscriptService {
+class ApiService {
+  Future<bool> saveMetric(String apiKey, Metric args) async {
+    bool didWork = false;
+
+    try {
+      var requestBody = {
+        'service_name': 'save_entities_metrics_metabase',
+        'service_args': args.toJson(),
+        'api_key': apiKey,
+      };
+      var response = await http.post(
+        Uri.parse('https://care-voice-ai.azurewebsites.net/services'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200) {
+        print("Response received successfully."); // Log de depuração
+        var body = Map<String, dynamic>.from(jsonDecode(response.body));
+
+        return body["status"];
+      } else {
+        throw Exception('Failed to load transcript: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error: ${e}");
+    }
+
+    return didWork;
+  }
+
+  void saveMetrics() {}
+
   Future<List<Map<String, dynamic>>> useAssistants(
       String apiKey, List<Assistant> assistants, String transcript) async {
     List<Map<String, dynamic>> entities = [];
@@ -14,7 +48,7 @@ class TranscriptService {
       var requestBody = {
         'service_args': {
           "transcript": transcript,
-          "assistant_ids": assistants.map((e) => e.toJson()).toList(),
+          "assistant_ids": assistants.map((e) => e.toJson()["id"]).toList(),
         },
         'api_key': apiKey,
       };
@@ -31,10 +65,24 @@ class TranscriptService {
       // Verificar o status da resposta
       if (response.statusCode == 200) {
         print("Response received successfully."); // Log de depuração
-        var aqui =
-            Map<String, dynamic>.from(jsonDecode(response.body))["entities"];
-
-        print(aqui);
+        for (Assistant assistant in assistants) {
+          for (Map<String, dynamic> entitie
+              in jsonDecode(response.body)["entities"]) {
+            if (entitie.containsKey(assistant.id)) {
+              entities.add(entitie);
+              LogServices().saveMetric(
+                apiKey,
+                Metric(
+                  assistantId: assistant.id,
+                  evaluationVersion: "Package 0.0.7",
+                  inputValue: transcript,
+                  outputValue: entitie[assistant.id],
+                  seconds: entitie["seconds"],
+                ),
+              );
+            }
+          }
+        }
       } else {
         throw Exception('Failed to load transcript: ${response.statusCode}');
       }
@@ -70,6 +118,7 @@ class TranscriptService {
         for (var i = 0; i < body["assistants"].length; i++) {
           assistants.add(Assistant.fromJson(body["assistants"][i]));
         }
+        print(body);
       } else {
         throw Exception('Failed to load transcript: ${response.statusCode}');
       }

@@ -1,10 +1,10 @@
 import 'package:record/record.dart';
-import 'package:voice_copilot/services/transcript/main.dart';
+import 'package:voice_copilot/services/api/main.dart';
 import 'package:voice_copilot/services/record.dart';
 
 class CalibrationService {
   final AudioRecorder recorder;
-  final TranscriptService _service = TranscriptService();
+  final ApiService _service = ApiService();
   String baseText = "";
   String language = "pt";
 

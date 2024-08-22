@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:voice_copilot/services/transcript/main.dart';
+import 'package:voice_copilot/services/api/main.dart';
 import 'package:voice_copilot/services/encoder/main.dart';
 
 class RecordService {
   final AudioRecorder recorder;
-  final TranscriptService _service = TranscriptService();
+  final ApiService _service = ApiService();
 
   RecordService({required this.recorder});
 

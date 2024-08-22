@@ -96,7 +96,6 @@ class _MyAppState extends State<MyApp> {
                       await _voiceCopilotPlugin.getAssistants();
 
                   _assistantList = assistants;
-                  print(assistants);
 
                   setState(() {
                     _assistants = assistants.map((e) => e.toJson()).toString();
@@ -112,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                   List<Map<String, dynamic>> entities =
                       await _voiceCopilotPlugin.useAssistants(
                           _assistantList ?? [],
-                          "Nenhum pertence encontrado na vitima");
+                          "Vitima caiu de uma altura de 30 metros, morte subita");
                   setState(() {
                     _entities = entities.toString();
                   });
